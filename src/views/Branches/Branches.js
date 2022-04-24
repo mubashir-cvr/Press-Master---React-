@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import CIcon from '@coreui/icons-react'
 import {
   CCard,
   CCardBody,
@@ -16,24 +17,24 @@ import {
   CFormLabel,
   CButton,
   CFormSelect,
+  CFormTextarea,
 } from '@coreui/react'
+import { cilTrash, cilPencil } from '@coreui/icons'
 
 const Tables = () => {
   const [name, setName] = useState('')
-  const [designation, setDesignation] = useState('')
+  const [address, setAddress] = useState('')
   const [phone, setPhone] = useState('')
-  const [department, setDepartment] = useState('')
-  const [workers, setWorkers] = useState([])
+  const [branches, setBranchs] = useState([])
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (name && designation && phone && department) {
-      const dep = { id: new Date().getTime().toString(), name, designation, phone, department }
-      setWorkers((workers) => {
+    if (name && address && phone) {
+      const dep = { id: new Date().getTime().toString(), name, address, phone }
+      setBranchs((branches) => {
         setName('')
-        setDesignation('')
+        setAddress('')
         setPhone('')
-        setDepartment('')
-        return [...workers, dep]
+        return [...branches, dep]
       })
     }
   }
@@ -43,41 +44,14 @@ const Tables = () => {
         <CCol xs={12}>
           <CCard className="mb-4">
             <CCardHeader>
-              <CRow>
-                <CCol sm={12} lg={6}>
-                  <strong>Add/List Workers</strong>
-                </CCol>
-                <CCol sm={12} lg={6}>
-                  <CRow>
-                    <CCol sm={6} lg={2}>
-                      <div className="pl-2 mb-3 mt-3">
-                        <CFormLabel htmlFor="exampleFormControlInput1">Branch :</CFormLabel>
-                      </div>
-                    </CCol>
-                    <CCol sm={6} lg={6}>
-                      <div className="mb-3 mt-2">
-                        <CFormSelect
-                          aria-label="Default select example"
-                          value={department}
-                          onChange={(e) => setDepartment(e.target.value)}
-                        >
-                          <option>All</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
-                        </CFormSelect>
-                      </div>
-                    </CCol>
-                  </CRow>
-                </CCol>
-              </CRow>
+              <strong>Add Branches</strong>
             </CCardHeader>
             <CCardBody>
               <CForm onSubmit={handleSubmit}>
                 <CRow>
                   <CCol lg={2} sm={12}>
                     <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Employee :</CFormLabel>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Branch Name :</CFormLabel>
                     </div>
                   </CCol>
                   <CCol lg={6} sm={12}>
@@ -95,17 +69,17 @@ const Tables = () => {
                 <CRow>
                   <CCol lg={2} sm={12}>
                     <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Designation :</CFormLabel>
+                      <CFormLabel htmlFor="exampleFormControlInput1">Address :</CFormLabel>
                     </div>
                   </CCol>
                   <CCol lg={6} sm={12}>
                     <div className="mb-3">
-                      <CFormInput
+                      <CFormTextarea
                         type="text"
-                        value={designation}
-                        placeholder="Designation"
+                        value={address}
+                        placeholder="Address"
                         aria-label="worker"
-                        onChange={(e) => setDesignation(e.target.value)}
+                        onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
                   </CCol>
@@ -129,31 +103,10 @@ const Tables = () => {
                   </CCol>
                 </CRow>
                 <CRow>
-                  <CCol lg={2} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Department :</CFormLabel>
-                    </div>
-                  </CCol>
-                  <CCol lg={6} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormSelect
-                        aria-label="Default select example"
-                        value={department}
-                        onChange={(e) => setDepartment(e.target.value)}
-                      >
-                        <option>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </CFormSelect>
-                    </div>
-                  </CCol>
-                </CRow>
-                <CRow>
                   <CCol lg={12} sm={12}>
                     <div className="mb-3 text-center">
                       <CButton color="success" type="submit">
-                        Add Worker
+                        Add Branch
                       </CButton>
                     </div>
                   </CCol>
@@ -167,7 +120,7 @@ const Tables = () => {
         <CCol xs={12}>
           <CCard className="mb-4">
             <CCardHeader>
-              <strong>Workers</strong>
+              <strong>Branches</strong>
             </CCardHeader>
             <CCardBody>
               <CTable>
@@ -175,21 +128,44 @@ const Tables = () => {
                   <CTableRow>
                     <CTableHeaderCell scope="col">SL/No</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Designation</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Address</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Phone</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Department</CTableHeaderCell>
+                    <CTableHeaderCell scope="col" colSpan={2}>
+                      Action
+                    </CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  {workers.map((dep, index) => {
-                    const { id, name, designation, phone, department } = dep
+                  {branches.map((dep, index) => {
+                    const { id, name, address, phone } = dep
                     return (
                       <CTableRow key={id}>
                         <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
                         <CTableDataCell>{name}</CTableDataCell>
-                        <CTableDataCell>{designation}</CTableDataCell>
+                        <CTableDataCell>{address}</CTableDataCell>
                         <CTableDataCell>{phone}</CTableDataCell>
-                        <CTableDataCell>{department}</CTableDataCell>
+                        <CTableDataCell>
+                          <div className="icon-div">
+                            <CIcon
+                              icon={cilTrash}
+                              customClassName="nav-icon"
+                              color="red"
+                              size={'sm'}
+                              onClick={() => console.log('Delete :' + name)}
+                            />
+                          </div>
+                        </CTableDataCell>
+                        <CTableDataCell>
+                          <div className="icon-div">
+                            <CIcon
+                              icon={cilPencil}
+                              customClassName="nav-icon"
+                              color="green"
+                              size={'sm'}
+                              onClick={() => console.log('Edit :' + name)}
+                            />
+                          </div>
+                        </CTableDataCell>
                       </CTableRow>
                     )
                   })}

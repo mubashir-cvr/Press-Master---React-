@@ -21,6 +21,7 @@ const Tables = React.lazy(() => import('./views/base/tables/Tables'))
 const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'))
 const Department = React.lazy(() => import('./views/Department/Department'))
 const Workers = React.lazy(() => import('./views/Workers/Workers'))
+const Branches = React.lazy(() => import('./views/Branches/Branches'))
 
 // Buttons
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'))
@@ -74,6 +75,7 @@ const routes = [
   { path: '/base/tables', name: 'Tables', element: Tables },
   { path: '/base/tooltips', name: 'Tooltips', element: Tooltips },
   { path: '/department/department', name: 'Department', element: Department },
+  { path: '/branches/branches', name: 'Workers', element: Branches },
   { path: '/workers/workers', name: 'Workers', element: Workers },
   { path: '/buttons', name: 'Buttons', element: Buttons, exact: true },
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },

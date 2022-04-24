@@ -13,23 +13,26 @@ import {
   cilPeople,
   cilSpeedometer,
   cilStar,
+  cilHome,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
     component: CNavItem,
-    name: 'Dashboard',
+    name: 'Home',
     to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
-    name: 'Theme',
+    name: 'Admin',
+  },
+  {
+    component: CNavItem,
+    name: 'Branches',
+    to: '/branches/branches',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
 
   {
