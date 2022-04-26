@@ -1,3 +1,17 @@
 .icon-div{
     width: 20px;
 }
+
+.card-rounded{
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 0.5px grey;
+
+}
+
+
+
+.icon-div-mobile{
+    width: 20px;
+    display: flex;
+    justify-content: center;
+}

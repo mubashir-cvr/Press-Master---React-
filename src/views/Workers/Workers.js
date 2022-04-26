@@ -17,12 +17,15 @@ import {
   CButton,
   CFormSelect,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilPlus } from '@coreui/icons'
 
 const Tables = () => {
   const [name, setName] = useState('')
   const [designation, setDesignation] = useState('')
   const [phone, setPhone] = useState('')
   const [department, setDepartment] = useState('')
+  const [branch, setBranch] = useState('')
   const [workers, setWorkers] = useState([])
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -37,11 +40,16 @@ const Tables = () => {
       })
     }
   }
+  const displayForm = (e) => {
+    e.preventDefault()
+    var element = document.getElementById('employeeForm')
+    element.classList.toggle('d-none')
+  }
   return (
     <>
       <CRow>
         <CCol xs={12}>
-          <CCard className="mb-4">
+          <CCard className="mb-4 card-rounded">
             <CCardHeader>
               <CRow>
                 <CCol sm={12} lg={6}>
@@ -59,7 +67,7 @@ const Tables = () => {
                         <CFormSelect
                           aria-label="Default select example"
                           value={department}
-                          onChange={(e) => setDepartment(e.target.value)}
+                          onChange={(e) => setBranch(e.target.value)}
                         >
                           <option>All</option>
                           <option value="1">One</option>
@@ -71,8 +79,19 @@ const Tables = () => {
                   </CRow>
                 </CCol>
               </CRow>
+              <CRow>
+                <CCol className="icon-div-mobile">
+                  <div className="icon-div-mobile d-lg-none d-sm-block">
+                    <CButton color="success" onClick={displayForm}>
+                      <div className="d-flex text-white">
+                        Create <CIcon icon={cilPlus} />
+                      </div>
+                    </CButton>
+                  </div>
+                </CCol>
+              </CRow>
             </CCardHeader>
-            <CCardBody>
+            <CCardBody id="employeeForm" className="card-rounded d-none">
               <CForm onSubmit={handleSubmit}>
                 <CRow>
                   <CCol lg={2} sm={12}>
@@ -163,7 +182,7 @@ const Tables = () => {
           </CCard>
         </CCol>
       </CRow>
-      <CRow>
+      <CRow className="d-none d-lg-block">
         <CCol xs={12}>
           <CCard className="mb-4">
             <CCardHeader>
