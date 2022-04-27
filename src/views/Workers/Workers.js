@@ -9,34 +9,90 @@ import {
   CTable,
   CTableBody,
   CTableDataCell,
-  CTableHead,
-  CTableHeaderCell,
   CTableRow,
   CForm,
   CFormLabel,
   CButton,
   CFormSelect,
+  CAvatar,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
-
+import avatar1 from 'src/assets/images/avatars/1.jpg'
+import avatar2 from 'src/assets/images/avatars/2.jpg'
+import avatar3 from 'src/assets/images/avatars/3.jpg'
+import avatar4 from 'src/assets/images/avatars/4.jpg'
+import avatar5 from 'src/assets/images/avatars/5.jpg'
+import avatar6 from 'src/assets/images/avatars/6.jpg'
 const Tables = () => {
   const [name, setName] = useState('')
   const [designation, setDesignation] = useState('')
   const [phone, setPhone] = useState('')
   const [department, setDepartment] = useState('')
   const [branch, setBranch] = useState('')
-  const [workers, setWorkers] = useState([])
+  const tableExample = [
+    {
+      avatar: { src: avatar1, status: 'success' },
+      user: {
+        name: 'Yiorgos Avraamu',
+        new: true,
+        registered: 'Jan 1, 2021',
+        department: 'Department',
+        designation: 'Test Designation',
+      },
+    },
+    {
+      avatar: { src: avatar2, status: 'danger' },
+      user: {
+        name: 'Avram Tarasios',
+        new: false,
+        registered: 'Jan 1, 2021',
+        department: 'Department',
+        designation: 'Test Designation',
+      },
+    },
+    {
+      avatar: { src: avatar3, status: 'warning' },
+      user: {
+        name: 'Quintin Ed',
+        new: true,
+        registered: 'Jan 1, 2021',
+        department: 'Department',
+        designation: 'Test Designation',
+      },
+    },
+    {
+      avatar: { src: avatar4, status: 'secondary' },
+      user: {
+        name: 'Enéas Kwadwo',
+        new: true,
+        registered: 'Jan 1, 2021',
+        department: 'Department',
+        designation: 'Test Designation',
+      },
+    },
+  ]
+  const [workers, setWorkers] = useState(tableExample)
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (name && designation && phone && department) {
+      const worker = {
+        avatar: { src: avatar5, status: 'success' },
+        user: {
+          name: name,
+          new: true,
+          department: department,
+          designation: designation,
+        },
+      }
       const dep = { id: new Date().getTime().toString(), name, designation, phone, department }
       setWorkers((workers) => {
         setName('')
         setDesignation('')
         setPhone('')
         setDepartment('')
-        return [...workers, dep]
+        return [worker, ...workers]
       })
     }
   }
@@ -48,7 +104,7 @@ const Tables = () => {
   return (
     <>
       <CRow>
-        <CCol xs={12}>
+        <CCol xs={12} lg={12}>
           <CCard className="mb-4 card-rounded">
             <CCardHeader>
               <CRow>
@@ -66,7 +122,7 @@ const Tables = () => {
                       <div className="mb-3 mt-2">
                         <CFormSelect
                           aria-label="Default select example"
-                          value={department}
+                          value={branch}
                           onChange={(e) => setBranch(e.target.value)}
                         >
                           <option>All</option>
@@ -91,81 +147,92 @@ const Tables = () => {
                 </CCol>
               </CRow>
             </CCardHeader>
-            <CCardBody id="employeeForm" className="card-rounded d-none">
+            <CCardBody id="employeeForm" className="card-rounded d-none d-lg-block">
               <CForm onSubmit={handleSubmit}>
                 <CRow>
-                  <CCol lg={2} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Employee :</CFormLabel>
-                    </div>
+                  <CCol lg={6} sm={12}>
+                    <CRow>
+                      <CCol lg={3} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">Employee :</CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={9} sm={12}>
+                        <div className="mb-3">
+                          <CFormInput
+                            type="text"
+                            value={name}
+                            placeholder="Name"
+                            aria-label="worker"
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                        </div>
+                      </CCol>
+                    </CRow>
                   </CCol>
                   <CCol lg={6} sm={12}>
-                    <div className="mb-3">
-                      <CFormInput
-                        type="text"
-                        value={name}
-                        placeholder="Name"
-                        aria-label="worker"
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    </div>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol lg={2} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Designation :</CFormLabel>
-                    </div>
-                  </CCol>
-                  <CCol lg={6} sm={12}>
-                    <div className="mb-3">
-                      <CFormInput
-                        type="text"
-                        value={designation}
-                        placeholder="Designation"
-                        aria-label="worker"
-                        onChange={(e) => setDesignation(e.target.value)}
-                      />
-                    </div>
-                  </CCol>
-                </CRow>
-                <CRow>
-                  <CCol lg={2} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Phone Number :</CFormLabel>
-                    </div>
+                    <CRow>
+                      <CCol lg={3} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">Designation :</CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={9} sm={12}>
+                        <div className="mb-3">
+                          <CFormInput
+                            type="text"
+                            value={designation}
+                            placeholder="Designation"
+                            aria-label="worker"
+                            onChange={(e) => setDesignation(e.target.value)}
+                          />
+                        </div>
+                      </CCol>
+                    </CRow>
                   </CCol>
                   <CCol lg={6} sm={12}>
-                    <div className="mb-3">
-                      <CFormInput
-                        type="text"
-                        value={phone}
-                        placeholder="Phone Number"
-                        aria-label="worker"
-                        onChange={(e) => setPhone(e.target.value)}
-                      />
-                    </div>
+                    <CRow>
+                      <CCol lg={4} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">Phone Number :</CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={8} sm={12}>
+                        <div className="mb-3">
+                          <CFormInput
+                            type="text"
+                            value={phone}
+                            placeholder="Phone Number"
+                            aria-label="worker"
+                            onChange={(e) => setPhone(e.target.value)}
+                          />
+                        </div>
+                      </CCol>
+                    </CRow>
                   </CCol>
-                </CRow>
-                <CRow>
-                  <CCol lg={2} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Department :</CFormLabel>
-                    </div>
-                  </CCol>
+
                   <CCol lg={6} sm={12}>
-                    <div className="pl-2 mb-3 mt-2">
-                      <CFormSelect
-                        aria-label="Default select example"
-                        value={department}
-                        onChange={(e) => setDepartment(e.target.value)}
-                      >
-                        <option>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </CFormSelect>
-                    </div>
+                    <CRow>
+                      <CCol lg={3} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">Department :</CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={9} sm={12}>
+                        <div>
+                          <CFormSelect
+                            aria-label="Default select example"
+                            value={department}
+                            onChange={(e) => setDepartment(e.target.value)}
+                          >
+                            <option>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </CFormSelect>
+                        </div>
+                      </CCol>
+                    </CRow>
                   </CCol>
                 </CRow>
                 <CRow>
@@ -182,36 +249,31 @@ const Tables = () => {
           </CCard>
         </CCol>
       </CRow>
-      <CRow className="d-none d-lg-block">
+      <CRow>
         <CCol xs={12}>
           <CCard className="mb-4">
             <CCardHeader>
               <strong>Workers</strong>
             </CCardHeader>
             <CCardBody>
-              <CTable>
-                <CTableHead>
-                  <CTableRow>
-                    <CTableHeaderCell scope="col">SL/No</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Designation</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Phone</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Department</CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
+              <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableBody>
-                  {workers.map((dep, index) => {
-                    const { id, name, designation, phone, department } = dep
-                    return (
-                      <CTableRow key={id}>
-                        <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                        <CTableDataCell>{name}</CTableDataCell>
-                        <CTableDataCell>{designation}</CTableDataCell>
-                        <CTableDataCell>{phone}</CTableDataCell>
-                        <CTableDataCell>{department}</CTableDataCell>
-                      </CTableRow>
-                    )
-                  })}
+                  {workers.map((item, index) => (
+                    <CTableRow v-for="item in tableItems" key={index}>
+                      <CTableDataCell className="text-center">
+                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <div>
+                          <strong>{item.user.name}</strong>
+                        </div>
+                        <div className="small text-medium-emphasis">
+                          <span>{item.user.department}</span> | {item.user.designation}{' '}
+                          {item.user.registered}
+                        </div>
+                      </CTableDataCell>
+                    </CTableRow>
+                  ))}
                 </CTableBody>
               </CTable>
             </CCardBody>
