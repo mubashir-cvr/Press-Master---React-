@@ -16,6 +16,7 @@ import {
   CFormSelect,
   CAvatar,
 } from '@coreui/react'
+import MainTableContent from 'src/components/MainTableContent'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
 import avatar1 from 'src/assets/images/avatars/1.jpg'
@@ -23,7 +24,6 @@ import avatar2 from 'src/assets/images/avatars/2.jpg'
 import avatar3 from 'src/assets/images/avatars/3.jpg'
 import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
 const Tables = () => {
   const [name, setName] = useState('')
   const [designation, setDesignation] = useState('')
@@ -99,7 +99,9 @@ const Tables = () => {
   const displayForm = (e) => {
     e.preventDefault()
     var element = document.getElementById('employeeForm')
+    var createbutton = document.getElementById('create')
     element.classList.toggle('d-none')
+    createbutton.classList.toggle('d-none')
   }
   return (
     <>
@@ -137,7 +139,7 @@ const Tables = () => {
               </CRow>
               <CRow>
                 <CCol className="icon-div-mobile">
-                  <div className="icon-div-mobile d-lg-none d-sm-block">
+                  <div id="create" className="icon-div-mobile d-lg-none d-sm-block">
                     <CButton color="success" onClick={displayForm}>
                       <div className="d-flex text-white">
                         Create <CIcon icon={cilPlus} />
@@ -239,7 +241,15 @@ const Tables = () => {
                   <CCol lg={12} sm={12}>
                     <div className="mb-3 text-center">
                       <CButton color="success" type="submit">
-                        Add Worker
+                        Add
+                      </CButton>
+                      <CButton
+                        onClick={displayForm}
+                        color="danger"
+                        className="m-2 d-lg-none d-sm-block"
+                        type="submit"
+                      >
+                        Cancel
                       </CButton>
                     </div>
                   </CCol>
@@ -259,20 +269,7 @@ const Tables = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableBody>
                   {workers.map((item, index) => (
-                    <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
-                        <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <div>
-                          <strong>{item.user.name}</strong>
-                        </div>
-                        <div className="small text-medium-emphasis">
-                          <span>{item.user.department}</span> | {item.user.designation}{' '}
-                          {item.user.registered}
-                        </div>
-                      </CTableDataCell>
-                    </CTableRow>
+                    <MainTableContent key={index} item={item} type={'test'} />
                   ))}
                 </CTableBody>
               </CTable>
