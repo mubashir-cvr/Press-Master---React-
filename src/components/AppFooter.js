@@ -1,21 +1,113 @@
 import React from 'react'
-import { CFooter } from '@coreui/react'
-
+import CIcon from '@coreui/icons-react'
+import { cilX, cilMenu, cilUser, cilSpreadsheet, cilVerticalAlignBottom } from '@coreui/icons'
+import { CFooter, CCol, CRow, CButton } from '@coreui/react'
+const toggleDrawer = (e) => {
+  e.preventDefault()
+  var element = document.getElementById('mb-footer')
+  var b_button = document.getElementById('bottom-button')
+  b_button.classList.toggle('d-none')
+  element.classList.toggle('is-open')
+}
 const AppFooter = () => {
   return (
     <CFooter>
-      <div>
-        <a href="https://coreui.io" target="_blank" rel="noopener noreferrer">
-          CoreUI
+      <div className="mobile-footer d-lg-none" id="mb-footer">
+        <a className="close-drawer-button" onClick={toggleDrawer}>
+          <CIcon size="lg" icon={cilX} />
         </a>
-        <span className="ms-1">&copy; 2022 creativeLabs.</span>
+        <div className="text-center">
+          <CRow className="p-4">
+            <div className="col-sm-12 text-center">
+              <CRow>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilUser} />
+                      <p className="mt-1">Customer</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilSpreadsheet} />
+                      <p className="mt-1">Estimate</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilVerticalAlignBottom} />
+                      <p className="mt-1">Invoice</p>
+                    </a>
+                  </div>
+                </div>
+              </CRow>
+              <CRow>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilUser} />
+                      <p className="mt-1">Customer</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilSpreadsheet} />
+                      <p className="mt-1">Estimate</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilVerticalAlignBottom} />
+                      <p className="mt-1">Invoice</p>
+                    </a>
+                  </div>
+                </div>
+              </CRow>
+              <CRow>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilUser} />
+                      <p className="mt-1">Customer</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilSpreadsheet} />
+                      <p className="mt-1">Estimate</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilVerticalAlignBottom} />
+                      <p className="mt-1">Invoice</p>
+                    </a>
+                  </div>
+                </div>
+              </CRow>
+            </div>
+          </CRow>
+        </div>
       </div>
-      <div className="ms-auto">
-        <span className="me-1">Powered by</span>
-        <a href="https://coreui.io/react" target="_blank" rel="noopener noreferrer">
-          CoreUI React Admin &amp; Dashboard Template
-        </a>
-      </div>
+      <a
+        className="d-lg-none bottom-drawer-button text-center"
+        id="bottom-button"
+        onClick={toggleDrawer}
+      >
+        <CIcon size="sm" icon={cilMenu} />
+      </a>
     </CFooter>
   )
 }

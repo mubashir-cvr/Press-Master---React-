@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import CIcon from '@coreui/icons-react'
+import MainTableContent from 'src/components/MainTableContent'
 import {
   CCard,
   CCardBody,
@@ -124,51 +125,10 @@ const Tables = () => {
             </CCardHeader>
             <CCardBody>
               <CTable>
-                <CTableHead>
-                  <CTableRow>
-                    <CTableHeaderCell scope="col">SL/No</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Name</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Address</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Phone</CTableHeaderCell>
-                    <CTableHeaderCell scope="col" colSpan={2}>
-                      Action
-                    </CTableHeaderCell>
-                  </CTableRow>
-                </CTableHead>
                 <CTableBody>
-                  {branches.map((dep, index) => {
-                    const { id, name, address, phone } = dep
-                    return (
-                      <CTableRow key={id}>
-                        <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
-                        <CTableDataCell>{name}</CTableDataCell>
-                        <CTableDataCell>{address}</CTableDataCell>
-                        <CTableDataCell>{phone}</CTableDataCell>
-                        <CTableDataCell>
-                          <div className="icon-div">
-                            <CIcon
-                              icon={cilTrash}
-                              customClassName="nav-icon"
-                              color="red"
-                              size={'sm'}
-                              onClick={() => console.log('Delete :' + name)}
-                            />
-                          </div>
-                        </CTableDataCell>
-                        <CTableDataCell>
-                          <div className="icon-div">
-                            <CIcon
-                              icon={cilPencil}
-                              customClassName="nav-icon"
-                              color="green"
-                              size={'sm'}
-                              onClick={() => console.log('Edit :' + name)}
-                            />
-                          </div>
-                        </CTableDataCell>
-                      </CTableRow>
-                    )
-                  })}
+                  {branches.map((item, index) => (
+                    <MainTableContent key={index} item={item} type={'branch'} />
+                  ))}
                 </CTableBody>
               </CTable>
             </CCardBody>

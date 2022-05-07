@@ -4,7 +4,7 @@ import CIcon from '@coreui/icons-react'
 import { cilDoor, cilPencil, cilTrash } from '@coreui/icons'
 import { CTableDataCell, CTableRow, CAvatar } from '@coreui/react'
 function MainTableContent({ item, type }) {
-  if (type == 'department') {
+  if (type === 'department') {
     return (
       <CTableRow v-for="item in tableItems" key={item.id}>
         <CTableDataCell className="text-center">
@@ -23,6 +23,36 @@ function MainTableContent({ item, type }) {
             <span className="text-danger">
               {' '}
               {'Pending Works :'} {item.pendingwork}
+            </span>
+          </div>
+        </CTableDataCell>
+        <CTableDataCell className="text-center text-success">
+          <CIcon size="xl" icon={cilPencil} />
+        </CTableDataCell>
+        <CTableDataCell className="text-center text-danger">
+          <CIcon size="xl" icon={cilTrash} />
+        </CTableDataCell>
+      </CTableRow>
+    )
+  } else if (type === 'branch') {
+    return (
+      <CTableRow v-for="item in tableItems" key={item.id}>
+        <CTableDataCell className="text-center">
+          <CIcon size="lg" icon={cilDoor} />
+        </CTableDataCell>
+        <CTableDataCell className="text-left">
+          <div>
+            <strong>{item.name}</strong>
+          </div>
+          <div className="small text-medium-emphasis">
+            <span className="text-success">
+              {'No of Workers :'}
+              {item.address}
+            </span>{' '}
+            |{' '}
+            <span className="text-danger">
+              {' '}
+              {'Pending Works :'} {item.phone}
             </span>
           </div>
         </CTableDataCell>
