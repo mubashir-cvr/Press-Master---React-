@@ -1,6 +1,18 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilX, cilMenu, cilUser, cilSpreadsheet, cilVerticalAlignBottom } from '@coreui/icons'
+import {
+  cilX,
+  cilMenu,
+  cilUser,
+  cilDescription,
+  cilSpreadsheet,
+  cilVerticalAlignBottom,
+  cilQrCode,
+  cilDoor,
+  cilWalk,
+  cilPrint,
+  cilList,
+} from '@coreui/icons'
 import { CFooter, CCol, CRow, CButton } from '@coreui/react'
 const toggleDrawer = (e) => {
   e.preventDefault()
@@ -39,7 +51,7 @@ const AppFooter = () => {
                 <div className="col-4">
                   <div className="drawerItem">
                     <a>
-                      <CIcon size="xl" icon={cilVerticalAlignBottom} />
+                      <CIcon size="xl" icon={cilDescription} />
                       <p className="mt-1">Invoice</p>
                     </a>
                   </div>
@@ -49,16 +61,8 @@ const AppFooter = () => {
                 <div className="col-4">
                   <div className="drawerItem">
                     <a>
-                      <CIcon size="xl" icon={cilUser} />
-                      <p className="mt-1">Customer</p>
-                    </a>
-                  </div>
-                </div>
-                <div className="col-4">
-                  <div className="drawerItem">
-                    <a>
-                      <CIcon size="xl" icon={cilSpreadsheet} />
-                      <p className="mt-1">Estimate</p>
+                      <CIcon size="xl" icon={cilList} />
+                      <p className="mt-1">Items</p>
                     </a>
                   </div>
                 </div>
@@ -66,7 +70,15 @@ const AppFooter = () => {
                   <div className="drawerItem">
                     <a>
                       <CIcon size="xl" icon={cilVerticalAlignBottom} />
-                      <p className="mt-1">Invoice</p>
+                      <p className="mt-1">Payment</p>
+                    </a>
+                  </div>
+                </div>
+                <div className="col-4">
+                  <div className="drawerItem">
+                    <a>
+                      <CIcon size="xl" icon={cilPrint} />
+                      <p className="mt-1">Printer</p>
                     </a>
                   </div>
                 </div>
@@ -75,24 +87,24 @@ const AppFooter = () => {
                 <div className="col-4">
                   <div className="drawerItem">
                     <a>
-                      <CIcon size="xl" icon={cilUser} />
-                      <p className="mt-1">Customer</p>
+                      <CIcon size="xl" icon={cilQrCode} />
+                      <p className="mt-1">Jobs</p>
                     </a>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="drawerItem">
                     <a>
-                      <CIcon size="xl" icon={cilSpreadsheet} />
-                      <p className="mt-1">Estimate</p>
+                      <CIcon size="xl" icon={cilDoor} />
+                      <p className="mt-1">Branches</p>
                     </a>
                   </div>
                 </div>
                 <div className="col-4">
                   <div className="drawerItem">
                     <a>
-                      <CIcon size="xl" icon={cilVerticalAlignBottom} />
-                      <p className="mt-1">Invoice</p>
+                      <CIcon size="xl" icon={cilWalk} />
+                      <p className="mt-1">Workers</p>
                     </a>
                   </div>
                 </div>

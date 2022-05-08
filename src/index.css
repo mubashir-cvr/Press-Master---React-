@@ -22,6 +22,7 @@
     bottom: 0;
     width: 96%;
     height: 300px;
+    padding: 20px 0px 15px 15px;
     background-color: #c6cad1;
     color: rgb(0, 0, 0);
     border-radius: 20px 20px 0px 0px;
@@ -79,8 +80,21 @@
 }
 
 .mobile-footer .drawerItem{
-    background-color: #dedede9c;
+    background-color: #ffffff9c;
     padding: 9px 9px 0px 9px;
     width:60px;
     border-radius: 10px;
+}
+
+.workers-form{
+    opacity: 0;
+    transform: translateY(100%);
+    transition: 0.5s ease;
+    height: 0;
+}
+
+.workers-form.isopen{
+    opacity: 1;
+    height: 100%;
+    transform: translateY(0);
 }

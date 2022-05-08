@@ -100,7 +100,7 @@ const Tables = () => {
     e.preventDefault()
     var element = document.getElementById('employeeForm')
     var createbutton = document.getElementById('create')
-    element.classList.toggle('d-none')
+    element.classList.toggle('isopen')
     createbutton.classList.toggle('d-none')
   }
   return (
@@ -149,7 +149,7 @@ const Tables = () => {
                 </CCol>
               </CRow>
             </CCardHeader>
-            <CCardBody id="employeeForm" className="card-rounded d-none d-lg-block">
+            <CCardBody id="employeeForm" className="card-rounded d-lg-block workers-form">
               <CForm onSubmit={handleSubmit}>
                 <CRow>
                   <CCol lg={6} sm={12}>

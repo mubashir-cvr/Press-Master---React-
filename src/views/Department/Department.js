@@ -28,7 +28,14 @@ const Tables = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (department) {
-      const dep = { id: new Date().getTime().toString(), department }
+      const dep = {
+        id: new Date().getTime().toString(),
+        department: {
+          name: department,
+        },
+        numberofworkers: 0,
+        pendingwork: 0,
+      }
       setDepartments((departments) => {
         setDepartment('')
         return [dep, ...departments]
