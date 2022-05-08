@@ -7,11 +7,10 @@ import {
   cilCursor,
   cilDrop,
   cilRoom,
-  cilNotes,
   cilPencil,
   cilPuzzle,
   cilPeople,
-  cilSpeedometer,
+  cilNotes,
   cilStar,
   cilHome,
 } from '@coreui/icons'
@@ -44,6 +43,18 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Workers',
+    to: '/workers/workers',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Size Chart',
+    to: '/sizechart/sizechart',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Items',
     to: '/workers/workers',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
