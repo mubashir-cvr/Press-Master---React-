@@ -139,7 +139,7 @@ const Tables = () => {
               </CRow>
               <CRow>
                 <CCol className="icon-div-mobile">
-                  <div id="create" className="icon-div-mobile d-lg-none d-sm-block">
+                  <div id="create" className="icon-div-mobile d-sm-block">
                     <CButton color="success" onClick={displayForm}>
                       <div className="d-flex text-white">
                         Create <CIcon icon={cilPlus} />
