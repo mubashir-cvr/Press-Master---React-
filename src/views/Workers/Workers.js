@@ -8,13 +8,10 @@ import {
   CFormInput,
   CTable,
   CTableBody,
-  CTableDataCell,
-  CTableRow,
   CForm,
   CFormLabel,
   CButton,
   CFormSelect,
-  CAvatar,
 } from '@coreui/react'
 import MainTableContent from 'src/components/MainTableContent'
 import CIcon from '@coreui/icons-react'
