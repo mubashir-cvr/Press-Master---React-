@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CIcon from '@coreui/icons-react'
 import MainTableContent from 'src/components/MainTableContent'
 import {
@@ -14,12 +14,24 @@ import {
   CFormLabel,
   CButton,
 } from '@coreui/react'
+import { MultiSelect } from 'react-multi-select-component'
 import { cilTrash, cilPencil } from '@coreui/icons'
 
 const Tables = () => {
   const [name, setName] = useState('')
   const [length, setLength] = useState('')
   const [breadth, setBreadth] = useState('')
+  const [selected, setSelected] = useState([])
+
+  useEffect(() => {
+    options.map((option, index) => {
+      if (option.selected) {
+        setSelected((selected) => {
+          return [option, ...selected]
+        })
+      }
+    })
+  }, [])
   const handleSubmit = (e) => {
     e.preventDefault()
     if (name && length && breadth) {
@@ -32,6 +44,12 @@ const Tables = () => {
       })
     }
   }
+  const options = [
+    { label: 'Paper', value: 1, selected: true },
+    { label: 'Plate', value: 2, selected: false },
+    { label: 'All', value: 3, disabled: true },
+  ]
+
   const availableSizes = [
     {
       name: 'A4',
@@ -115,6 +133,23 @@ const Tables = () => {
                         placeholder="Example : 29"
                         aria-label="worker"
                         onChange={(e) => setBreadth(e.target.value)}
+                      />
+                    </div>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol lg={2} sm={12}>
+                    <div className="pl-2 mb-3 mt-2">
+                      <CFormLabel htmlFor="exampleFormControlInput1">Materials:</CFormLabel>
+                    </div>
+                  </CCol>
+                  <CCol lg={2} sm={12}>
+                    <div className="mb-3">
+                      <MultiSelect
+                        options={options}
+                        value={selected}
+                        onChange={setSelected}
+                        labelledBy="Select"
                       />
                     </div>
                   </CCol>

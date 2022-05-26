@@ -21,10 +21,12 @@ const Tables = React.lazy(() => import('./views/base/tables/Tables'))
 const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'))
 const Department = React.lazy(() => import('./views/Department/Department'))
 const Workers = React.lazy(() => import('./views/Workers/Workers'))
+const Customers = React.lazy(() => import('./views/Customers/Customers'))
 const Branches = React.lazy(() => import('./views/Branches/Branches'))
 const PrintingType = React.lazy(() => import('./views/PrintingType/PrintingType'))
 const SizeChart = React.lazy(() => import('./views/SizeChart/SizeChart'))
 const Stocks = React.lazy(() => import('./views/Stocks/Stocks'))
+const Printers = React.lazy(() => import('./views/Printers/Printers'))
 // Buttons
 const Buttons = React.lazy(() => import('./views/buttons/buttons/Buttons'))
 const ButtonGroups = React.lazy(() => import('./views/buttons/button-groups/ButtonGroups'))
@@ -79,7 +81,9 @@ const routes = [
   { path: '/department/department', name: 'Department', element: Department },
   { path: '/branches/branches', name: 'Workers', element: Branches },
   { path: '/workers/workers', name: 'Workers', element: Workers },
+  { path: '/customers', name: 'Customers', element: Customers },
   { path: '/sizechart/sizechart', name: 'Workers', element: SizeChart },
+  { path: '/printers/printers', name: 'Printers', element: Printers },
   { path: '/printingtype/printingtype', name: 'Printing Type', element: PrintingType },
   { path: '/stocks/stocks', name: 'Stocks', element: Stocks },
   { path: '/buttons', name: 'Buttons', element: Buttons, exact: true },

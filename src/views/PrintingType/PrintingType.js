@@ -109,7 +109,7 @@ const Tables = () => {
         <CCol xs={12}>
           <CCard className="mb-4">
             <CCardHeader>
-              <strong>Size Chart</strong>
+              <strong>Printing Types</strong>
             </CCardHeader>
             <CCardBody>
               <CTable>

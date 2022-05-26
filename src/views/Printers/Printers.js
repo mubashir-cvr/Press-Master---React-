@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import CIcon from '@coreui/icons-react'
+import MainTableContent from 'src/components/MainTableContent'
+import { MultiSelect } from 'react-multi-select-component'
 import {
   CCard,
   CCardBody,
@@ -13,71 +16,61 @@ import {
   CButton,
   CFormSelect,
 } from '@coreui/react'
-import MainTableContent from 'src/components/MainTableContent'
-import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import { cilTrash, cilPencil } from '@coreui/icons'
+
 const Tables = () => {
-  const [name, setName] = useState('')
-  const [quantity, setQuantity] = useState('')
-  const [length, setLength] = useState('')
-  const [breadth, setBreadth] = useState('')
+  const [type, setType] = useState('')
   const [material, setMaterial] = useState('')
-  const [importprice, setImportPrice] = useState('')
-  const [sellingprice, setSellingPrice] = useState('')
-  const availablestocks = [
-    {
-      name: 'Double Dummy',
-      length: 29,
-      breadth: 29,
-      quantity: 100,
-    },
-    {
-      name: 'Crown',
-      length: 40,
-      breadth: 29,
-      quantity: 100,
-    },
-    {
-      name: 'Dummy',
-      length: 29,
-      breadth: 29,
-      quantity: 100,
-    },
-    {
-      name: 'Test',
-      length: 29,
-      breadth: 29,
-      quantity: 100,
-    },
-  ]
-  const [stocks, setStocks] = useState(availablestocks)
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (name && quantity && length && breadth && importprice && sellingprice) {
-      const stock = {
-        name: name,
-        length: length,
-        breadth: breadth,
-        quantity: quantity,
-      }
-      setStocks((stocks) => {
-        setName('')
-        setQuantity('')
-        setBreadth('')
-        setLength('')
-        setImportPrice('')
-        setSellingPrice('')
-        return [stock, ...stocks]
+    if (type && material) {
+      const print = { id: new Date().getTime().toString(), type, material }
+      setPrinting((printing) => {
+        setType('')
+        setMaterial('')
+        return [...printing, print]
       })
     }
   }
+  const [printer, setPrinter] = useState('')
+  const [branch, setBranch] = useState('')
+  const [length, setLength] = useState('')
+  const [breadth, setBreadth] = useState('')
+  const [minimumcharge, setMinimuCharge] = useState('')
+  const [minimumprint, setMinimumPrint] = useState('')
+  const [stepcharge, setStepCharge] = useState('')
+  const [selected, setSelected] = useState([])
+
+  const options = [
+    { label: 'Paper', value: 1, selected: true },
+    { label: 'Plate', value: 2, selected: false },
+    { label: 'Plate', value: 2, selected: false },
+    { label: 'Plate', value: 2, selected: false },
+    { label: 'All', value: 3, disabled: true },
+  ]
+  const availableSizes = [
+    {
+      type: 'Paper Printing',
+      material: 'Paper',
+      pendingwork: 29,
+    },
+    {
+      type: 'Laser Printing',
+      material: 'Plate',
+      pendingwork: 29,
+    },
+  ]
   const displayForm = (e) => {
     e.preventDefault()
     var element = document.getElementById('employeeForm')
     var createbutton = document.getElementById('create')
+    var printerlist = document.getElementById('printers-list')
     element.classList.toggle('isopen')
     createbutton.classList.toggle('d-none')
+    printerlist.classList.toggle('d-none')
   }
+  const [printing, setPrinting] = useState(availableSizes)
   return (
     <>
       <CRow>
@@ -86,21 +79,21 @@ const Tables = () => {
             <CCardHeader>
               <CRow>
                 <CCol sm={12} lg={6}>
-                  <strong>Create Stock</strong>
+                  <strong>Add Printer</strong>
                 </CCol>
                 <CCol sm={12} lg={6}>
                   <CRow>
                     <CCol sm={6} lg={2}>
                       <div className="pl-2 mb-3 mt-3">
-                        <CFormLabel htmlFor="exampleFormControlInput1">Material:</CFormLabel>
+                        <CFormLabel htmlFor="exampleFormControlInput1">Branch:</CFormLabel>
                       </div>
                     </CCol>
                     <CCol sm={6} lg={6}>
                       <div className="mb-3 mt-2">
                         <CFormSelect
                           aria-label="Default select example"
-                          value={material}
-                          onChange={(e) => setMaterial(e.target.value)}
+                          value={branch}
+                          onChange={(e) => setBranch(e.target.value)}
                         >
                           <option>All</option>
                           <option value="1">One</option>
@@ -117,7 +110,7 @@ const Tables = () => {
                   <div id="create" className="icon-div-mobile d-sm-block">
                     <CButton color="success" onClick={displayForm}>
                       <div className="d-flex text-white">
-                        Create <CIcon icon={cilPlus} />
+                        Add <CIcon icon={cilPlus} />
                       </div>
                     </CButton>
                   </div>
@@ -131,17 +124,17 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={3} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Name:</CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">Printer :</CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={9} sm={12}>
                         <div className="mb-3">
                           <CFormInput
                             type="text"
-                            value={name}
+                            value={printer}
                             placeholder="Name"
                             aria-label="worker"
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => setPrinter(e.target.value)}
                           />
                         </div>
                       </CCol>
@@ -151,17 +144,19 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={3} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Quantity :</CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">
+                            Minimum Charge :
+                          </CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={9} sm={12}>
                         <div className="mb-3">
                           <CFormInput
                             type="text"
-                            value={quantity}
+                            value={minimumcharge}
                             placeholder="Quantity"
                             aria-label="worker"
-                            onChange={(e) => setQuantity(e.target.value)}
+                            onChange={(e) => setMinimuCharge(e.target.value)}
                           />
                         </div>
                       </CCol>
@@ -171,19 +166,17 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={4} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">
-                            Import Price/ Unit:
-                          </CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">Mimimum Print:</CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={8} sm={12}>
                         <div className="mb-3">
                           <CFormInput
                             type="text"
-                            value={importprice}
-                            placeholder="Import Price"
+                            value={minimumprint}
+                            placeholder="Number of prints"
                             aria-label="worker"
-                            onChange={(e) => setImportPrice(e.target.value)}
+                            onChange={(e) => setMinimumPrint(e.target.value)}
                           />
                         </div>
                       </CCol>
@@ -193,19 +186,17 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={4} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">
-                            Selling Price/ Unit:
-                          </CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">Extra amount :</CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={8} sm={12}>
                         <div className="mb-3">
                           <CFormInput
                             type="text"
-                            value={sellingprice}
-                            placeholder="Selling Price"
+                            value={stepcharge}
+                            placeholder="Penalty Amount"
                             aria-label="worker"
-                            onChange={(e) => setSellingPrice(e.target.value)}
+                            onChange={(e) => setStepCharge(e.target.value)}
                           />
                         </div>
                       </CCol>
@@ -217,7 +208,9 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={4} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Length :</CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">
+                            Maximum Length:
+                          </CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={8} sm={12}>
@@ -237,7 +230,54 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={4} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Breadth:</CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">
+                            Maximu Breadth:
+                          </CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={8} sm={12}>
+                        <div className="mb-3">
+                          <CFormInput
+                            type="text"
+                            value={breadth}
+                            placeholder="Breadth"
+                            aria-label="worker"
+                            onChange={(e) => setBreadth(e.target.value)}
+                          />
+                        </div>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                </CRow>
+                <CRow>
+                  <CCol lg={5} sm={12}>
+                    <CRow>
+                      <CCol lg={4} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">
+                            Printing Materials:
+                          </CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={8} sm={12}>
+                        <div className="mb-3">
+                          <MultiSelect
+                            options={options}
+                            value={selected}
+                            onChange={setSelected}
+                            labelledBy="Select"
+                          />
+                        </div>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol lg={6} sm={12}>
+                    <CRow>
+                      <CCol lg={4} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">
+                            Maximu Breadth:
+                          </CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={8} sm={12}>
@@ -276,23 +316,26 @@ const Tables = () => {
           </CCard>
         </CCol>
       </CRow>
+
       <CRow>
-        <CCol xs={12}>
-          <CCard className="mb-4">
-            <CCardHeader>
-              <strong>Material- Quantity & Sizes</strong>
-            </CCardHeader>
-            <CCardBody>
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableBody>
-                  {stocks.map((item, index) => (
-                    <MainTableContent key={index} item={item} type={'stock'} />
-                  ))}
-                </CTableBody>
-              </CTable>
-            </CCardBody>
-          </CCard>
-        </CCol>
+        <div id="printers-list">
+          <CCol xs={12}>
+            <CCard className="mb-4">
+              <CCardHeader>
+                <strong>Printers</strong>
+              </CCardHeader>
+              <CCardBody>
+                <CTable>
+                  <CTableBody>
+                    {printing.map((item, index) => (
+                      <MainTableContent key={index} item={item} type={'printing'} />
+                    ))}
+                  </CTableBody>
+                </CTable>
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </div>
       </CRow>
     </>
   )

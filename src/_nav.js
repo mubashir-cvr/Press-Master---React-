@@ -67,6 +67,18 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Printers',
+    to: '/printers/printers',
+    icon: <CIcon icon={cilPrint} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Customers',
+    to: '/customers',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Typography',
     to: '/theme/typography',
     icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
