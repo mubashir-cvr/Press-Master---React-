@@ -1,7 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CIcon from '@coreui/icons-react'
-import { cilDoor, cilPencil, cilTrash, cilNotes, cilPlus, cilPrint, cilMinus } from '@coreui/icons'
+import {
+  cilDoor,
+  cilPencil,
+  cilTrash,
+  cilNotes,
+  cilPlus,
+  cilPrint,
+  cilMinus,
+  cilArrowBottom,
+  cilArrowTop,
+  cilUser,
+} from '@coreui/icons'
 import { CTableDataCell, CTableRow, CAvatar } from '@coreui/react'
 function MainTableContent({ item, type }) {
   if (type === 'department') {
@@ -154,6 +165,60 @@ function MainTableContent({ item, type }) {
         </CTableDataCell>
         <CTableDataCell className="text-center text-danger">
           <CIcon size="xl" icon={cilTrash} />
+        </CTableDataCell>
+      </CTableRow>
+    )
+  } else if (type === 'customer') {
+    return (
+      <CTableRow v-for="item in tableItems" key={item.id}>
+        <CTableDataCell className="text-center">
+          <CIcon size="xl" icon={cilUser} />
+        </CTableDataCell>
+        <CTableDataCell>
+          <div>
+            <strong>{item.user.name}</strong>
+          </div>
+          <div className="small text-medium-emphasis">
+            <span className="text-success">
+              <CIcon size="md" className="text-success" icon={cilArrowBottom} /> {item.user.pending}
+            </span>{' '}
+            |{' '}
+            <a className="text-decoration-none" href={'tel:' + item.user.phone}>
+              {item.user.phone}
+            </a>{' '}
+            | <span className="text-danger">{item.user.date}</span>
+          </div>
+        </CTableDataCell>
+        <CTableDataCell className="text-center d-lg-none">
+          <CIcon
+            size="sm"
+            onClick={() => alert('edit')}
+            className="text-success mb-2"
+            icon={cilPencil}
+          />
+          {' | '}
+          <CIcon
+            size="sm"
+            onClick={() => alert('Delete')}
+            className="text-danger"
+            icon={cilTrash}
+          />
+        </CTableDataCell>
+        <CTableDataCell className="d-none d-lg-block">
+          <CIcon
+            size="xl"
+            onClick={() => alert('edit')}
+            className="text-success mb-2"
+            icon={cilPencil}
+          />
+        </CTableDataCell>
+        <CTableDataCell className="d-none d-lg-block">
+          <CIcon
+            size="xl"
+            onClick={() => alert('Delete')}
+            className="text-danger"
+            icon={cilTrash}
+          />
         </CTableDataCell>
       </CTableRow>
     )

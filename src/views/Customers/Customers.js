@@ -12,6 +12,7 @@ import {
   CFormLabel,
   CButton,
   CFormSelect,
+  CFormTextarea,
 } from '@coreui/react'
 import MainTableContent from 'src/components/MainTableContent'
 import CIcon from '@coreui/icons-react'
@@ -23,9 +24,8 @@ import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 const Tables = () => {
   const [name, setName] = useState('')
-  const [designation, setDesignation] = useState('')
   const [phone, setPhone] = useState('')
-  const [department, setDepartment] = useState('')
+  const [address, setAddress] = useState('')
   const [branch, setBranch] = useState('')
   const tableExample = [
     {
@@ -33,9 +33,10 @@ const Tables = () => {
       user: {
         name: 'Yiorgos Avraamu',
         new: true,
-        registered: 'Jan 1, 2021',
-        department: 'Department',
-        designation: 'Test Designation',
+        date: 'Jan 1, 2021',
+        address: 'Department',
+        phone: '9656248731',
+        pending: 25000,
       },
     },
     {
@@ -43,9 +44,10 @@ const Tables = () => {
       user: {
         name: 'Avram Tarasios',
         new: false,
-        registered: 'Jan 1, 2021',
-        department: 'Department',
-        designation: 'Test Designation',
+        date: 'Jan 1, 2021',
+        address: 'Department',
+        phone: '9656248731',
+        pending: 25000,
       },
     },
     {
@@ -53,9 +55,10 @@ const Tables = () => {
       user: {
         name: 'Quintin Ed',
         new: true,
-        registered: 'Jan 1, 2021',
-        department: 'Department',
-        designation: 'Test Designation',
+        date: 'Jan 1, 2021',
+        address: 'Department',
+        phone: '9656248731',
+        pending: 25000,
       },
     },
     {
@@ -63,9 +66,10 @@ const Tables = () => {
       user: {
         name: 'Enéas Kwadwo',
         new: true,
-        registered: 'Jan 1, 2021',
-        department: 'Department',
-        designation: 'Test Designation',
+        date: 'Jan 1, 2021',
+        address: 'Department',
+        phone: '9656248731',
+        pending: 25000,
       },
     },
   ]
@@ -73,22 +77,20 @@ const Tables = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (name && designation && phone && department) {
+    if (name && phone && address) {
       const worker = {
         avatar: { src: avatar5, status: 'success' },
         user: {
           name: name,
           new: true,
-          department: department,
-          designation: designation,
+          department: address,
         },
       }
-      const dep = { id: new Date().getTime().toString(), name, designation, phone, department }
+      const dep = { id: new Date().getTime().toString(), name, phone, address }
       setWorkers((workers) => {
         setName('')
-        setDesignation('')
         setPhone('')
-        setDepartment('')
+        setAddress('')
         return [worker, ...workers]
       })
     }
@@ -108,7 +110,7 @@ const Tables = () => {
             <CCardHeader>
               <CRow>
                 <CCol sm={12} lg={6}>
-                  <strong>Add/List Workers</strong>
+                  <strong>Customers</strong>
                 </CCol>
                 <CCol sm={12} lg={6}>
                   <CRow>
@@ -153,7 +155,7 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={3} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Employee :</CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">Customer :</CFormLabel>
                         </div>
                       </CCol>
                       <CCol lg={9} sm={12}>
@@ -164,26 +166,6 @@ const Tables = () => {
                             placeholder="Name"
                             aria-label="worker"
                             onChange={(e) => setName(e.target.value)}
-                          />
-                        </div>
-                      </CCol>
-                    </CRow>
-                  </CCol>
-                  <CCol lg={6} sm={12}>
-                    <CRow>
-                      <CCol lg={3} sm={12}>
-                        <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Designation :</CFormLabel>
-                        </div>
-                      </CCol>
-                      <CCol lg={9} sm={12}>
-                        <div className="mb-3">
-                          <CFormInput
-                            type="text"
-                            value={designation}
-                            placeholder="Designation"
-                            aria-label="worker"
-                            onChange={(e) => setDesignation(e.target.value)}
                           />
                         </div>
                       </CCol>
@@ -214,21 +196,17 @@ const Tables = () => {
                     <CRow>
                       <CCol lg={3} sm={12}>
                         <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">Department :</CFormLabel>
+                          <CFormLabel htmlFor="exampleFormControlInput1">Address :</CFormLabel>
                         </div>
                       </CCol>
-                      <CCol lg={9} sm={12}>
-                        <div>
-                          <CFormSelect
-                            aria-label="Default select example"
-                            value={department}
-                            onChange={(e) => setDepartment(e.target.value)}
-                          >
-                            <option>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </CFormSelect>
+                      <CCol lg={8} sm={12}>
+                        <div className="mb-3">
+                          <CFormTextarea
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                          ></CFormTextarea>
                         </div>
                       </CCol>
                     </CRow>
@@ -266,7 +244,7 @@ const Tables = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableBody>
                   {workers.map((item, index) => (
-                    <MainTableContent key={index} item={item} type={'test'} />
+                    <MainTableContent key={index} item={item} type={'customer'} />
                   ))}
                 </CTableBody>
               </CTable>

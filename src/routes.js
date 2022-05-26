@@ -47,6 +47,7 @@ const Charts = React.lazy(() => import('./views/charts/Charts'))
 // Icons
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'))
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'))
+const Customer = React.lazy(() => import('./views/icons/flags/Flags'))
 const Brands = React.lazy(() => import('./views/icons/brands/Brands'))
 
 // Notifications
@@ -78,14 +79,15 @@ const routes = [
   { path: '/base/spinners', name: 'Spinners', element: Spinners },
   { path: '/base/tables', name: 'Tables', element: Tables },
   { path: '/base/tooltips', name: 'Tooltips', element: Tooltips },
-  { path: '/department/department', name: 'Department', element: Department },
-  { path: '/branches/branches', name: 'Workers', element: Branches },
-  { path: '/workers/workers', name: 'Workers', element: Workers },
+  { path: '/department', name: 'Department', element: Department },
+  { path: '/branches', name: 'Workers', element: Branches },
+  { path: '/workers', name: 'Workers', element: Workers },
   { path: '/customers', name: 'Customers', element: Customers },
-  { path: '/sizechart/sizechart', name: 'Workers', element: SizeChart },
-  { path: '/printers/printers', name: 'Printers', element: Printers },
-  { path: '/printingtype/printingtype', name: 'Printing Type', element: PrintingType },
-  { path: '/stocks/stocks', name: 'Stocks', element: Stocks },
+  { path: '/customers/:id', name: 'Customers', element: Customer },
+  { path: '/sizechart', name: 'Workers', element: SizeChart },
+  { path: '/printers', name: 'Printers', element: Printers },
+  { path: '/printingtype', name: 'Printing Type', element: PrintingType },
+  { path: '/stocks', name: 'Stocks', element: Stocks },
   { path: '/buttons', name: 'Buttons', element: Buttons, exact: true },
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },
   { path: '/buttons/dropdowns', name: 'Dropdowns', element: Dropdowns },

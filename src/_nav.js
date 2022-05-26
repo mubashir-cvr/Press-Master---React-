@@ -31,44 +31,44 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Branches',
-    to: '/branches/branches',
+    to: '/branches',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
 
   {
     component: CNavItem,
     name: 'Departments',
-    to: '/department/department',
+    to: '/department',
     icon: <CIcon icon={cilRoom} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Workers',
-    to: '/workers/workers',
+    to: '/workers',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Printing Types',
-    to: '/printingtype/printingtype',
+    to: '/printingtype',
     icon: <CIcon icon={cilPrint} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Size Chart',
-    to: '/sizechart/sizechart',
+    to: '/sizechart',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Stocks',
-    to: '/stocks/stocks',
+    to: '/stocks',
     icon: <CIcon icon={cilTruck} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Printers',
-    to: '/printers/printers',
+    to: '/printers',
     icon: <CIcon icon={cilPrint} customClassName="nav-icon" />,
   },
   {
