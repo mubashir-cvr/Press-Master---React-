@@ -51,7 +51,7 @@ const Tables = () => {
   ]
   const availableSizes = [
     {
-      type: 'Paper Printing',
+      name: 'CROWN',
       material: 'Paper',
       pendingwork: 29,
     },
@@ -271,28 +271,6 @@ const Tables = () => {
                       </CCol>
                     </CRow>
                   </CCol>
-                  <CCol lg={6} sm={12}>
-                    <CRow>
-                      <CCol lg={4} sm={12}>
-                        <div className="pl-2 mb-3 mt-2">
-                          <CFormLabel htmlFor="exampleFormControlInput1">
-                            Maximu Breadth:
-                          </CFormLabel>
-                        </div>
-                      </CCol>
-                      <CCol lg={8} sm={12}>
-                        <div className="mb-3">
-                          <CFormInput
-                            type="text"
-                            value={breadth}
-                            placeholder="Breadth"
-                            aria-label="worker"
-                            onChange={(e) => setBreadth(e.target.value)}
-                          />
-                        </div>
-                      </CCol>
-                    </CRow>
-                  </CCol>
                 </CRow>
                 <CRow>
                   <CCol lg={12} sm={12}>
@@ -328,7 +306,7 @@ const Tables = () => {
                 <CTable>
                   <CTableBody>
                     {printing.map((item, index) => (
-                      <MainTableContent key={index} item={item} type={'printing'} />
+                      <MainTableContent key={index} item={item} type={'printers'} />
                     ))}
                   </CTableBody>
                 </CTable>

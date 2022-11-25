@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { CModalBody, CModal, CModalHeader, CModalTitle, CModalFooter } from '@coreui/react'
+import axios, * as others from 'axios'
 import {
   CCard,
   CCardBody,
@@ -28,51 +30,52 @@ const Tables = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (department) {
-      const dep = {
-        id: new Date().getTime().toString(),
-        department: {
-          name: department,
-        },
-        numberofworkers: 0,
-        pendingwork: 0,
-      }
-      setDepartments((departments) => {
-        setDepartment('')
-        return [dep, ...departments]
+      let name = department
+      const dep = { name }
+      axios.post('http://127.0.0.1:8000/apiv1/router/createDepartment/', dep).then((response) => {
+        setDepartments((departments) => {
+          setDepartment('')
+          return [...departments, response.data]
+        })
       })
     }
   }
-  const tableExample = [
-    {
-      department: {
-        name: 'Design',
-      },
-      numberofworkers: 34,
-      pendingwork: 2,
-    },
-    {
-      department: {
-        name: 'Printing',
-      },
-      numberofworkers: 34,
-      pendingwork: 2,
-    },
-    {
-      department: {
-        name: 'Accounts',
-      },
-      numberofworkers: 34,
-      pendingwork: 2,
-    },
-    {
-      department: {
-        name: 'Marketing',
-      },
-      numberofworkers: 34,
-      pendingwork: 2,
-    },
-  ]
-  const [departments, setDepartments] = useState(tableExample)
+  const [departments, setDepartments] = useState([])
+  const [rowRefresh, setRowRefresh] = useState(false)
+  const [dvisible, setDmodalVisible] = useState(false)
+  const [id, setID] = useState('')
+
+  useEffect(() => {
+    getDepartment()
+    setRowRefresh(false)
+  }, [rowRefresh])
+  const getDepartment = () => {
+    axios
+      .get('http://127.0.0.1:8000/apiv1/router/createDepartment/')
+      .then((response) => {
+        setDepartments(response.data)
+      })
+      .catch(function (error) {
+        // handle error
+      })
+      .then(function () {
+        // always executed
+      })
+
+    // console.log(users);
+  }
+
+  const showDeleteModal = (id) => {
+    setID(id)
+    setDmodalVisible(!dvisible)
+  }
+
+  const handleDelete = () => {
+    axios.delete('http://127.0.0.1:8000/apiv1/router/createDepartment/' + id)
+    setDmodalVisible(!dvisible)
+    let newDepratments = departments.filter((department) => department.id !== id)
+    setDepartments(newDepratments)
+  }
 
   return (
     <>
@@ -124,7 +127,12 @@ const Tables = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableBody>
                   {departments.map((item, index) => (
-                    <MainTableContent key={index} item={item} type={'department'} />
+                    <MainTableContent
+                      key={index}
+                      item={item}
+                      type={'department'}
+                      showDeleteModal={showDeleteModal}
+                    />
                   ))}
                 </CTableBody>
               </CTable>
@@ -132,6 +140,20 @@ const Tables = () => {
           </CCard>
         </CCol>
       </CRow>
+      <CModal visible={dvisible} onClose={() => setDmodalVisible(false)}>
+        <CModalHeader onClose={() => setDmodalVisible(false)}>
+          <CModalTitle>Delete Department ?</CModalTitle>
+        </CModalHeader>
+        <CModalBody></CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setDmodalVisible(false)}>
+            Cancel
+          </CButton>
+          <CButton color="primary" onClick={() => handleDelete()}>
+            Ok
+          </CButton>
+        </CModalFooter>
+      </CModal>
     </>
   )
 }

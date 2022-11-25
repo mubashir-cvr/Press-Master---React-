@@ -98,3 +98,12 @@
     height: 100%;
     transform: translateY(0);
 }
+
+.photoPreview{
+    width: fit-content;
+    z-index: -10;
+}
+
+.workerLoader{
+    margin-left: 40%;
+}

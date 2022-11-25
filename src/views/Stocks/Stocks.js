@@ -24,30 +24,35 @@ const Tables = () => {
   const [material, setMaterial] = useState('')
   const [importprice, setImportPrice] = useState('')
   const [sellingprice, setSellingPrice] = useState('')
+  const [gsm, setGsm] = useState('')
   const availablestocks = [
     {
       name: 'Double Dummy',
       length: 29,
       breadth: 29,
       quantity: 100,
+      gsm: 100,
     },
     {
       name: 'Crown',
       length: 40,
       breadth: 29,
       quantity: 100,
+      gsm: 100,
     },
     {
       name: 'Dummy',
       length: 29,
       breadth: 29,
       quantity: 100,
+      gsm: 100,
     },
     {
       name: 'Test',
       length: 29,
       breadth: 29,
       quantity: 100,
+      gsm: 100,
     },
   ]
   const [stocks, setStocks] = useState(availablestocks)
@@ -248,6 +253,26 @@ const Tables = () => {
                             placeholder="Breadth"
                             aria-label="worker"
                             onChange={(e) => setBreadth(e.target.value)}
+                          />
+                        </div>
+                      </CCol>
+                    </CRow>
+                  </CCol>
+                  <CCol lg={6} sm={12}>
+                    <CRow>
+                      <CCol lg={4} sm={12}>
+                        <div className="pl-2 mb-3 mt-2">
+                          <CFormLabel htmlFor="exampleFormControlInput1">GSM:</CFormLabel>
+                        </div>
+                      </CCol>
+                      <CCol lg={8} sm={12}>
+                        <div className="mb-3">
+                          <CFormInput
+                            type="text"
+                            value={gsm}
+                            placeholder="GSM"
+                            aria-label="worker"
+                            onChange={(e) => setGsm(e.target.value)}
                           />
                         </div>
                       </CCol>

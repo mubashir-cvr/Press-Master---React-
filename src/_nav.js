@@ -28,12 +28,6 @@ const _nav = [
     component: CNavTitle,
     name: 'Admin',
   },
-  {
-    component: CNavItem,
-    name: 'Branches',
-    to: '/branches',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  },
 
   {
     component: CNavItem,

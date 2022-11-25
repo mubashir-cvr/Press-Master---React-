@@ -22,7 +22,6 @@ const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'))
 const Department = React.lazy(() => import('./views/Department/Department'))
 const Workers = React.lazy(() => import('./views/Workers/Workers'))
 const Customers = React.lazy(() => import('./views/Customers/Customers'))
-const Branches = React.lazy(() => import('./views/Branches/Branches'))
 const PrintingType = React.lazy(() => import('./views/PrintingType/PrintingType'))
 const SizeChart = React.lazy(() => import('./views/SizeChart/SizeChart'))
 const Stocks = React.lazy(() => import('./views/Stocks/Stocks'))
@@ -80,7 +79,6 @@ const routes = [
   { path: '/base/tables', name: 'Tables', element: Tables },
   { path: '/base/tooltips', name: 'Tooltips', element: Tooltips },
   { path: '/department', name: 'Department', element: Department },
-  { path: '/branches', name: 'Workers', element: Branches },
   { path: '/workers', name: 'Workers', element: Workers },
   { path: '/customers', name: 'Customers', element: Customers },
   { path: '/customers/:id', name: 'Customers', element: Customer },
