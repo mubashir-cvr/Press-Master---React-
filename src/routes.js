@@ -22,8 +22,9 @@ const Tooltips = React.lazy(() => import('./views/base/tooltips/Tooltips'))
 const Department = React.lazy(() => import('./views/Department/Department'))
 const Workers = React.lazy(() => import('./views/Workers/Workers'))
 const Customers = React.lazy(() => import('./views/Customers/Customers'))
-const PrintingType = React.lazy(() => import('./views/PrintingType/PrintingType'))
-const SizeChart = React.lazy(() => import('./views/SizeChart/SizeChart'))
+const PrintingType = React.lazy(() => import('./views/PrintingType/MainPage'))
+const PrintingMaterial = React.lazy(() => import('./views/PrintingMaterial/MainPage'))
+const SizeChart = React.lazy(() => import('./views/SizeChart/MainPage'))
 const Stocks = React.lazy(() => import('./views/Stocks/Stocks'))
 const Printers = React.lazy(() => import('./views/Printers/Printers'))
 // Buttons
@@ -85,6 +86,7 @@ const routes = [
   { path: '/sizechart', name: 'Workers', element: SizeChart },
   { path: '/printers', name: 'Printers', element: Printers },
   { path: '/printingtype', name: 'Printing Type', element: PrintingType },
+  { path: '/printingmaterial', name: 'Printing Material', element: PrintingMaterial },
   { path: '/stocks', name: 'Stocks', element: Stocks },
   { path: '/buttons', name: 'Buttons', element: Buttons, exact: true },
   { path: '/buttons/buttons', name: 'Buttons', element: Buttons },

@@ -16,16 +16,19 @@ import {
 } from '@coreui/react'
 import { MultiSelect } from 'react-multi-select-component'
 import { cilTrash, cilPencil } from '@coreui/icons'
-
+import axios, * as others from 'axios'
 const Tables = () => {
   const [name, setName] = useState('')
   const [length, setLength] = useState('')
   const [breadth, setBreadth] = useState('')
   const [selected, setSelected] = useState([])
-
+  const [materialOptions, SetMaterialOptions] = useState([])
+  const [sizes, setSize] = useState([])
   useEffect(() => {
-    options.map((option, index) => {
-      if (option.selected) {
+    getPrintingMaterials()
+    getSizeChart()
+    materialOptions.map((option, index) => {
+      if (materialOptions.selected) {
         setSelected((selected) => {
           return [option, ...selected]
         })
@@ -33,9 +36,10 @@ const Tables = () => {
     })
   }, [])
   const handleSubmit = (e) => {
+    console.log(selected)
     e.preventDefault()
     if (name && length && breadth) {
-      const size = { id: new Date().getTime().toString(), name, length, breadth }
+      const size = { id: new Date().getTime().toString(), name, length, breadth, selected }
       setSize((sizes) => {
         setName('')
         setLength('')
@@ -44,35 +48,47 @@ const Tables = () => {
       })
     }
   }
-  const options = [
-    { label: 'Paper', value: 1, selected: true },
-    { label: 'Plate', value: 2, selected: false },
-    { label: 'All', value: 3, disabled: true },
-  ]
 
-  const availableSizes = [
-    {
-      name: 'A4',
-      length: 29,
-      breadth: 29,
-    },
-    {
-      name: 'A3',
-      length: 40,
-      breadth: 29,
-    },
-    {
-      name: 'A5',
-      length: 29,
-      breadth: 29,
-    },
-    {
-      name: 'B2',
-      length: 29,
-      breadth: 29,
-    },
-  ]
-  const [sizes, setSize] = useState(availableSizes)
+  const getPrintingMaterials = () => {
+    axios
+      .get('http://127.0.0.1:8000/apiv1/router/printingmaterialall/')
+      .then((response) => {
+        for (let i = 0; i < response.data.length; i++) {
+          let material = {
+            label: response.data[i].printMaterial,
+            value: response.data[i].id,
+            selected: false,
+          }
+          SetMaterialOptions((materialOptions) => {
+            return [material, ...materialOptions]
+          })
+        }
+      })
+      .catch(function (error) {
+        // handle error
+      })
+      .then(function () {
+        // always executed
+      })
+
+    // console.log(users);
+  }
+  const getSizeChart = () => {
+    axios
+      .get('http://127.0.0.1:8000/apiv1/router/sizechart/')
+      .then((response) => {
+        setSize(response.data)
+      })
+      .catch(function (error) {
+        // handle error
+      })
+      .then(function () {
+        // always executed
+      })
+
+    // console.log(users);
+  }
+
   return (
     <>
       <CRow>
@@ -140,13 +156,15 @@ const Tables = () => {
                 <CRow>
                   <CCol lg={2} sm={12}>
                     <div className="pl-2 mb-3 mt-2">
-                      <CFormLabel htmlFor="exampleFormControlInput1">Materials:</CFormLabel>
+                      <CFormLabel htmlFor="exampleFormControlInput1">
+                        Available Materials:
+                      </CFormLabel>
                     </div>
                   </CCol>
                   <CCol lg={2} sm={12}>
                     <div className="mb-3">
                       <MultiSelect
-                        options={options}
+                        options={materialOptions}
                         value={selected}
                         onChange={setSelected}
                         labelledBy="Select"

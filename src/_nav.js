@@ -14,6 +14,7 @@ import {
   cilNotes,
   cilStar,
   cilHome,
+  cilBalanceScale,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -49,9 +50,15 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: 'Printing Material',
+    to: '/printingmaterial',
+    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
     name: 'Size Chart',
     to: '/sizechart',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBalanceScale} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,

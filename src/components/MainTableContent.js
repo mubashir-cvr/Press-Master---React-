@@ -110,25 +110,14 @@ function MainTableContent({ item, type, showEditModal, showDeleteModal }) {
         </CTableDataCell>
         <CTableDataCell className="text-left">
           <div>
-            <strong>{item.type}</strong>
-          </div>
-          <div className="small text-medium-emphasis">
-            <span className="text-success">
-              {'Material:'}
-              {item.material}
-            </span>{' '}
-            |{' '}
-            <span className="text-danger">
-              {' '}
-              {'Pending Works:'} {item.pendingwork || 0}
-            </span>
+            <strong>{item.printType}</strong>
           </div>
         </CTableDataCell>
         <CTableDataCell className="text-center text-success">
-          <CIcon size="xl" icon={cilPencil} />
+          <CIcon size="lg" icon={cilPencil} onClick={() => showEditModal(item.id)} />
         </CTableDataCell>
         <CTableDataCell className="text-center text-danger">
-          <CIcon size="xl" icon={cilTrash} />
+          <CIcon size="lg" icon={cilTrash} onClick={() => showDeleteModal(item.id)} />
         </CTableDataCell>
       </CTableRow>
     )
